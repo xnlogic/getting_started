@@ -1,10 +1,10 @@
 title: "blog title"
 author: "Blog Author"
 description: "Really cool blog about ... something"
-subheading: "Really cool blog about ... something"
+#subheading: "Really cool blog about ... something"
 more: "read more"
 url: "http://niklabs.cf"
-baseurl: "/contrast"
+baseurl: "/contrast" # comment out if in root directory
 
 comments:
     disqus: "niklasbuschmann"
@@ -18,7 +18,7 @@ style:
 #    headline: "#06f"
     description: "white"
     article:
-        odd: "#fbfbfb"
+        odd: "#ffffff"
         even: "#222222"
 
 links:
