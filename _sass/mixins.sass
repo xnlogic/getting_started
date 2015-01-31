@@ -1,10 +1,10 @@
-=contrast($background: #181818)
+=contrast($background)
     $light: lightness($background) > 50%
 
     background: $background
     color: if($light, black, white)
 
-=body_background($background: white, $padding: 33%)
+=body_background($background, $padding)
     $is_white: lightness($background) == 100%
 
     background: $background
@@ -17,7 +17,7 @@
         > *
             padding: 1em calc(13% - 1.6em)
 
-=article_background($background: white, $anchor: false)
+=article_background($background, $anchor)
     +contrast($background)
     $light: lightness($background) > 50%
 
