@@ -5,6 +5,7 @@
 @import mixins
 
 $body: {% if site.style.body %}{{ site.style.body }}{% else %}white{% endif %}
+$padding: {% if site.style.padding %}{{ site.style.padding }}{% else %}33%{% endif %}
 $anchor: {% if site.style.anchor %}{{ site.style.anchor }}{% else %}false{% endif %}
 $nav: {% if site.style.nav %}{{ site.style.nav }}{% else %}#181818{% endif %}
 $headline: {% if site.style.headline %}{{ site.style.headline }}{% else %}#06f{% endif %}
@@ -13,7 +14,7 @@ $odd: {% if site.style.article.odd %}{{ site.style.article.odd }}{% else %}white
 $even: {% if site.style.article.even %}{{ site.style.article.even }}{% else %}#222{% endif %}
 
 body
-    +body_background($body)
+    +body_background($body, $padding)
     > header, > footer
         +contrast($nav)
     > div
