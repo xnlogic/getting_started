@@ -3,15 +3,26 @@ layout: blank
 ---
     {% for page in site.posts %}
     <article>
+      <a href="{{ page.url | prepend: site.baseurl }}">
       <header>
-        <h2><a href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a></h2>
-        <p>{% if page.author %}{{ page.author }} • {% endif %}{% if page.date %}<time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%b %-d, %Y" }}</time>{% endif %}{% if page.categories %} • {{ page.categories | array_to_sentence_string }}{% endif %}</p>
+        <h3>{{ page.title }}</h3>
+        <p>
+          {{page.description}}
+        </p>
+        {{ site.more }} &raquo;
       </header>
+      </a>
+
+      <!--
       <div>
 {{ page.excerpt }}
       </div>
+    -->
+
+    <!--
       <footer>
-        <p><a href="{{ page.url | prepend: site.baseurl }}">{{ site.more }} &raquo;</a></p>
+        <a href="{{ page.url | prepend: site.baseurl }}">{{ site.more }} &raquo;</a>
       </footer>
+    -->
     </article>
     {% endfor %}

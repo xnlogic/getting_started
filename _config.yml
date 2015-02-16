@@ -1,13 +1,13 @@
-title: "blog title"
-author: "Blog Author"
-description: "Really cool blog about ... something"
+title: "xnlogic tutorials"
+#author: "Blog Author"
+description: "A collection of tutorials for the xnlogic framework."
 #subheading: "Really cool blog about ... something"
-more: "read more"
-url: "http://niklabs.me"
-baseurl: "/contrast" # comment out if in root directory
+more: "Go to the tutorial ..."
+#url: "http://niklabs.me"
+#baseurl: "/contrast" # comment out if in root directory
 
-comments:
-    disqus: "niklasbuschmann"
+#comments:
+#    disqus: "niklasbuschmann"
 #    isso: "comments.mysite.org"
 
 style:
@@ -23,12 +23,13 @@ style:
         even: "#222222"
 
 links:
-  - github: "https://github.com/me/"
-  - twitter: "https://twitter.com/me/"
-  - google-plus: "https://plus.google.com/+me"
-  - reddit: "https://www.reddit.com/user/me/"
-  - youtube: "https://www.youtube.com/user/me"
-  - steam: "http://steamcommunity.com/id/me/"
+  # - github: "https://github.com/me/"
+  # - twitter: "https://twitter.com/me/"
+  # - google-plus: "https://plus.google.com/+me"
+  # - reddit: "https://www.reddit.com/user/me/"
+  # - youtube: "https://www.youtube.com/user/me"
+  # - steam: "http://steamcommunity.com/id/me/"
+  - xnlogic: "http://xnlogic.com"
 
 excerpt_separator: "\n\n\n"
 defaults: [{scope: {path: ""}, values: {layout: "default"}}, {scope: {path: "", type: "posts"}, values: {comments: true}}]
