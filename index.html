@@ -1,28 +1,17 @@
 ---
 layout: blank
 ---
-    {% for page in site.posts %}
-    <article>
-      <a href="{{ page.url | prepend: site.baseurl }}">
-      <header>
-        <h3>{{ page.title }}</h3>
-        <p>
-          {{page.description}}
-        </p>
-        {{ site.more }} &raquo;
-      </header>
-      </a>
 
-      <!--
-      <div>
-{{ page.excerpt }}
-      </div>
-    -->
-
-    <!--
-      <footer>
-        <a href="{{ page.url | prepend: site.baseurl }}">{{ site.more }} &raquo;</a>
-      </footer>
-    -->
-    </article>
-    {% endfor %}
+{% for page in site.posts reversed %}
+  <article>
+    <a href="{{ page.url | prepend: site.baseurl }}">
+    <header>
+      <h3>{{ page.title }}</h3>
+      <p>
+        {{page.description}}
+      </p>
+      <!-- {{ site.more }} &raquo; -->
+    </header>
+    </a>
+  </article>
+{% endfor %}

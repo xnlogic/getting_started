@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     
-    <meta name="description" content="Faster development process using the IRB.">
+    <meta name="description" content="Access the application using the IRB.">
     <title> Your first xnlogic application - part 3 › xnlogic tutorials</title>
     <link rel="canonical" href="/tutorial/2014/01/01/tutorial1-3.html">
     <link href="/main.css" rel="stylesheet" type="text/css">
@@ -18,43 +18,160 @@
   </head>
   <body>
     <header>
-      <h1><a href="/">xnlogic tutorials</a></h1>
+      <a href="/">
+        <img class="center nav-image" src="/assets/logo.png"/>
+        <h1>Tutorials</h1>
+      </a>
+      
+      
+
+      <!--
+      
+      <h1><a href="/"> xnlogic tutorials</a></h1>
+      
+      -->
+      <!--
       <nav>
         <ul>
           <li><a href="/">Home</a></li>
         </ul>
       </nav>
+      -->
     </header>
+
     
     
-    <article>
+
+        <article>
+
       <header>
         <h2><a href="/tutorial/2014/01/01/tutorial1-3.html">Your first xnlogic application - part 3</a></h2>
-        <p><time datetime="2014-01-01T06:58:00-05:00">Jan 1, 2014</time> • tutorial</p>
       </header>
+
       <div>
-<p>In <strong>HOME/lib/my_twitter/post.rb</strong>:</p>
+<p>Now that we are ready to test our application, it is time to log into to VM.</p>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">module</span> <span class="nn">MyTwitter</span>
+<blockquote>
+  <p>If you haven’t started the VM, <code>cd</code> to the porject root directory and run <code>xnlogic up</code>.</p>
+</blockquote>
 
-  <span class="n">xn_part</span>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">~<span class="nv">$ </span><span class="nb">cd </span>my_app
+~/my_app<span class="nv">$ </span>xnlogic ssh</code></pre></div>
 
-  <span class="n">property</span> <span class="ss">:post</span><span class="p">,</span> <span class="ss">type</span><span class="p">:</span> <span class="ss">:text</span>
-  <span class="n">property</span> <span class="ss">:time</span><span class="p">,</span> <span class="ss">type</span><span class="p">:</span> <span class="ss">:date</span>
+<h2 id="start-the-console">Start The Console</h2>
 
-  <span class="n">from_one</span> <span class="ss">:User</span><span class="p">,</span> <span class="ss">to</span><span class="p">:</span> <span class="n">post</span><span class="p">,</span> <span class="ss">from</span><span class="p">:</span> <span class="n">posted_by</span>
+<p>We usually run our application in one of two ways: Deployed on a server, or in the IRB (aka xn-console). We will start by running the application in the IRB.</p>
 
-<span class="k">end</span></code></pre></div>
+<div class="highlight"><pre><code class="language-sh" data-lang="sh">➜  ~  xn-console</code></pre></div>
+
+<blockquote>
+  <p><em>Note:</em> Most of the development process is done using the IRB. We can even use it to simulate API requests.</p>
+</blockquote>
+
+<h2 id="create-a-database">Create A Database</h2>
+
+<p>Since this is the first time we run the application, we need to create a database. Let’s call our database <code>db01</code>.</p>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">jruby</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">7</span><span class="o">.</span><span class="mi">18</span> <span class="p">:</span><span class="mo">001</span> <span class="o">&gt;</span> <span class="no">PM</span><span class="o">.</span><span class="n">create_client</span><span class="p">(</span><span class="s1">&#39;my_app&#39;</span><span class="p">,</span> <span class="s1">&#39;db01&#39;</span><span class="p">)</span></code></pre></div>
+
+<blockquote>
+  <p><em>Note:</em> Creating a database is only required the first time we run the application.</p>
+</blockquote>
+
+<h2 id="send-api-requests">Send API requests</h2>
+
+<p>During development, it is convenient to simulate API requests from the console. We can get a reference to an application, by database name, and include its <code>console</code> module:</p>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">jruby</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">7</span><span class="o">.</span><span class="mi">18</span> <span class="p">:</span><span class="mo">002</span> <span class="o">&gt;</span> <span class="n">app</span> <span class="o">=</span> <span class="no">PM</span><span class="o">[</span><span class="s1">&#39;db01&#39;</span><span class="o">]</span>
+<span class="n">jruby</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">7</span><span class="o">.</span><span class="mi">18</span> <span class="p">:</span><span class="mo">003</span> <span class="o">&gt;</span> <span class="kp">include</span> <span class="n">app</span><span class="o">.</span><span class="n">console</span></code></pre></div>
+
+<blockquote>
+  <p>Once we include <code>app.console</code>, we can use the <code>xput</code>, <code>xget</code>, <code>xpath</code>, <code>xdelete</code> and <code>xpost</code> to simulate the corresponding HTTP request.</p>
+</blockquote>
+
+<h3 id="create">Create</h3>
+
+<p>We create model objects using PUT requests.</p>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">jruby</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">7</span><span class="o">.</span><span class="mi">18</span> <span class="p">:</span><span class="mo">004</span> <span class="o">&gt;</span> <span class="n">xput</span> <span class="s1">&#39;/model/user&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nb">name</span><span class="p">:</span> <span class="s1">&#39;Jon Adams&#39;</span><span class="p">}</span>
+<span class="n">jruby</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">7</span><span class="o">.</span><span class="mi">18</span> <span class="p">:</span><span class="mo">005</span> <span class="o">&gt;</span> <span class="n">xput</span> <span class="s1">&#39;/model/user&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nb">name</span><span class="p">:</span> <span class="s1">&#39;Cynthia Rogers&#39;</span><span class="p">}</span>
+<span class="n">jruby</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">7</span><span class="o">.</span><span class="mi">18</span> <span class="p">:</span><span class="mo">006</span> <span class="o">&gt;</span> <span class="n">xput</span> <span class="s1">&#39;/model/user&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nb">name</span><span class="p">:</span> <span class="s1">&#39;Randy Westbrook&#39;</span><span class="p">}</span>
+<span class="n">jruby</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">7</span><span class="o">.</span><span class="mi">18</span> <span class="p">:</span><span class="mo">007</span> <span class="o">&gt;</span> <span class="n">xput</span> <span class="s1">&#39;/model/user&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nb">name</span><span class="p">:</span> <span class="s1">&#39;Mary Pitts&#39;</span><span class="p">}</span></code></pre></div>
+
+<h3 id="read">Read</h3>
+
+<p>We read model objects using GET requests.</p>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">jruby</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">7</span><span class="o">.</span><span class="mi">18</span> <span class="p">:</span><span class="mo">00</span><span class="mi">8</span> <span class="o">&gt;</span> <span class="n">xget</span> <span class="s1">&#39;/model/user&#39;</span>
+<span class="p">{</span><span class="ss">:meta</span><span class="o">=&gt;</span><span class="p">{</span><span class="ss">:xnid</span><span class="o">=&gt;</span><span class="s2">&quot;/model/user/id/59&quot;</span><span class="p">,</span> <span class="ss">:model_name</span><span class="o">=&gt;</span><span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="ss">:rendered</span><span class="o">=&gt;[</span><span class="s2">&quot;record&quot;</span><span class="p">,</span> <span class="s2">&quot;has_notes&quot;</span><span class="p">,</span> <span class="s2">&quot;user&quot;</span><span class="o">]</span><span class="p">,</span> <span class="ss">:format</span><span class="o">=&gt;</span><span class="s2">&quot;partial&quot;</span><span class="p">,</span> <span class="ss">:rel_limit</span><span class="o">=&gt;</span><span class="mi">50</span><span class="p">},</span> <span class="ss">:id</span><span class="o">=&gt;</span><span class="mi">59</span><span class="p">,</span> <span class="ss">:name</span><span class="o">=&gt;</span><span class="s2">&quot;Mary Pitts&quot;</span><span class="p">,</span> <span class="ss">:model_name</span><span class="o">=&gt;</span><span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="ss">:description</span><span class="o">=&gt;</span><span class="kp">nil</span><span class="p">,</span> <span class="ss">:created_at</span><span class="o">=&gt;</span><span class="mi">2015</span><span class="o">-</span><span class="mo">02</span><span class="o">-</span><span class="mi">17</span> <span class="mo">04</span><span class="p">:</span><span class="mo">05</span><span class="p">:</span><span class="mi">41</span> <span class="no">UTC</span><span class="p">,</span> <span class="ss">:display_name</span><span class="o">=&gt;</span><span class="s2">&quot;Mary Pitts&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="ss">:meta</span><span class="o">=&gt;</span><span class="p">{</span><span class="ss">:xnid</span><span class="o">=&gt;</span><span class="s2">&quot;/model/user/id/58&quot;</span><span class="p">,</span> <span class="ss">:model_name</span><span class="o">=&gt;</span><span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="ss">:rendered</span><span class="o">=&gt;[</span><span class="s2">&quot;record&quot;</span><span class="p">,</span> <span class="s2">&quot;has_notes&quot;</span><span class="p">,</span> <span class="s2">&quot;user&quot;</span><span class="o">]</span><span class="p">,</span> <span class="ss">:format</span><span class="o">=&gt;</span><span class="s2">&quot;partial&quot;</span><span class="p">,</span> <span class="ss">:rel_limit</span><span class="o">=&gt;</span><span class="mi">50</span><span class="p">},</span> <span class="ss">:id</span><span class="o">=&gt;</span><span class="mi">58</span><span class="p">,</span> <span class="ss">:name</span><span class="o">=&gt;</span><span class="s2">&quot;Randy Westbrook&quot;</span><span class="p">,</span> <span class="ss">:model_name</span><span class="o">=&gt;</span><span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="ss">:description</span><span class="o">=&gt;</span><span class="kp">nil</span><span class="p">,</span> <span class="ss">:created_at</span><span class="o">=&gt;</span><span class="mi">2015</span><span class="o">-</span><span class="mo">02</span><span class="o">-</span><span class="mi">17</span> <span class="mo">04</span><span class="p">:</span><span class="mo">05</span><span class="p">:</span><span class="mi">41</span> <span class="no">UTC</span><span class="p">,</span> <span class="ss">:display_name</span><span class="o">=&gt;</span><span class="s2">&quot;Randy Westbrook&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="ss">:meta</span><span class="o">=&gt;</span><span class="p">{</span><span class="ss">:xnid</span><span class="o">=&gt;</span><span class="s2">&quot;/model/user/id/57&quot;</span><span class="p">,</span> <span class="ss">:model_name</span><span class="o">=&gt;</span><span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="ss">:rendered</span><span class="o">=&gt;[</span><span class="s2">&quot;record&quot;</span><span class="p">,</span> <span class="s2">&quot;has_notes&quot;</span><span class="p">,</span> <span class="s2">&quot;user&quot;</span><span class="o">]</span><span class="p">,</span> <span class="ss">:format</span><span class="o">=&gt;</span><span class="s2">&quot;partial&quot;</span><span class="p">,</span> <span class="ss">:rel_limit</span><span class="o">=&gt;</span><span class="mi">50</span><span class="p">},</span> <span class="ss">:id</span><span class="o">=&gt;</span><span class="mi">57</span><span class="p">,</span> <span class="ss">:name</span><span class="o">=&gt;</span><span class="s2">&quot;Cynthia Rogers&quot;</span><span class="p">,</span> <span class="ss">:model_name</span><span class="o">=&gt;</span><span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="ss">:description</span><span class="o">=&gt;</span><span class="kp">nil</span><span class="p">,</span> <span class="ss">:created_at</span><span class="o">=&gt;</span><span class="mi">2015</span><span class="o">-</span><span class="mo">02</span><span class="o">-</span><span class="mi">17</span> <span class="mo">04</span><span class="p">:</span><span class="mo">05</span><span class="p">:</span><span class="mi">41</span> <span class="no">UTC</span><span class="p">,</span> <span class="ss">:display_name</span><span class="o">=&gt;</span><span class="s2">&quot;Cynthia Rogers&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="ss">:meta</span><span class="o">=&gt;</span><span class="p">{</span><span class="ss">:xnid</span><span class="o">=&gt;</span><span class="s2">&quot;/model/user/id/60&quot;</span><span class="p">,</span> <span class="ss">:model_name</span><span class="o">=&gt;</span><span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="ss">:rendered</span><span class="o">=&gt;[</span><span class="s2">&quot;record&quot;</span><span class="p">,</span> <span class="s2">&quot;has_notes&quot;</span><span class="p">,</span> <span class="s2">&quot;user&quot;</span><span class="o">]</span><span class="p">,</span> <span class="ss">:format</span><span class="o">=&gt;</span><span class="s2">&quot;partial&quot;</span><span class="p">,</span> <span class="ss">:rel_limit</span><span class="o">=&gt;</span><span class="mi">50</span><span class="p">},</span> <span class="ss">:id</span><span class="o">=&gt;</span><span class="mi">60</span><span class="p">,</span> <span class="ss">:name</span><span class="o">=&gt;</span><span class="s2">&quot;Jon Adams&quot;</span><span class="p">,</span> <span class="ss">:model_name</span><span class="o">=&gt;</span><span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="ss">:description</span><span class="o">=&gt;</span><span class="kp">nil</span><span class="p">,</span> <span class="ss">:created_at</span><span class="o">=&gt;</span><span class="mi">2015</span><span class="o">-</span><span class="mo">02</span><span class="o">-</span><span class="mi">17</span> <span class="mo">04</span><span class="p">:</span><span class="mi">34</span><span class="p">:</span><span class="mi">42</span> <span class="no">UTC</span><span class="p">,</span> <span class="ss">:display_name</span><span class="o">=&gt;</span><span class="s2">&quot;Jon Adams&quot;</span><span class="p">}</span>
+<span class="ss">Total</span><span class="p">:</span> <span class="mi">4</span>
+ <span class="o">=&gt;</span> <span class="c1">#&lt;V-Lucene(model_name:&quot;user&quot;) ~ 4 -&gt; V-Range(-1...100) -&gt; Obj-Map&gt;</span></code></pre></div>
+
+<p>As you probably noticed, the server’s response is fairly verbose. What if we are only interested in the names of each user?</p>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">jruby</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">7</span><span class="o">.</span><span class="mi">18</span> <span class="p">:</span><span class="mo">00</span><span class="mi">9</span> <span class="o">&gt;</span> <span class="n">xget</span> <span class="s1">&#39;/model/user/properties/name&#39;</span>
+<span class="o">[</span><span class="mi">59</span><span class="p">,</span> <span class="s2">&quot;Mary Pitts&quot;</span><span class="o">]</span>      <span class="o">[</span><span class="mi">58</span><span class="p">,</span> <span class="s2">&quot;Randy Westbrook&quot;</span><span class="o">]</span> <span class="o">[</span><span class="mi">57</span><span class="p">,</span> <span class="s2">&quot;Cynthia Rogers&quot;</span><span class="o">]</span>  <span class="o">[</span><span class="mi">60</span><span class="p">,</span> <span class="s2">&quot;Jon Adams&quot;</span><span class="o">]</span>      
+<span class="ss">Total</span><span class="p">:</span> <span class="mi">4</span>
+ <span class="o">=&gt;</span> <span class="c1">#&lt;V-Lucene(model_name:&quot;user&quot;) ~ 4 -&gt; Obj-Map -&gt; Obj-Range(-1...100)&gt;</span></code></pre></div>
+
+<blockquote>
+  <p><em>Note:</em> We can specify multiple properties using a comma-separated list. For example: <code>/model/user/properties/name,created_at</code>.</p>
+</blockquote>
+
+<p>We can also get a user (or its properties) by id.</p>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">jruby</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">7</span><span class="o">.</span><span class="mi">18</span> <span class="p">:</span><span class="mo">010</span> <span class="o">&gt;</span> <span class="n">xget</span> <span class="s1">&#39;/model/user/id/57&#39;</span>
+<span class="n">jruby</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">7</span><span class="o">.</span><span class="mi">18</span> <span class="p">:</span><span class="mo">011</span> <span class="o">&gt;</span> <span class="n">xget</span> <span class="s1">&#39;/model/user/id/57/properties/name&#39;</span></code></pre></div>
+
+<p>Or by property value (e.g. the name).</p>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">jruby</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">7</span><span class="o">.</span><span class="mi">18</span> <span class="p">:</span><span class="mo">012</span> <span class="o">&gt;</span> <span class="n">xget</span> <span class="s1">&#39;/model/user/filter/name?name=Jon Adams&#39;</span>
+<span class="p">{</span><span class="ss">:meta</span><span class="o">=&gt;</span><span class="p">{</span><span class="ss">:xnid</span><span class="o">=&gt;</span><span class="s2">&quot;/model/user/id/60&quot;</span><span class="p">,</span> <span class="ss">:model_name</span><span class="o">=&gt;</span><span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="ss">:rendered</span><span class="o">=&gt;[</span><span class="s2">&quot;record&quot;</span><span class="p">,</span> <span class="s2">&quot;has_notes&quot;</span><span class="p">,</span> <span class="s2">&quot;user&quot;</span><span class="o">]</span><span class="p">,</span> <span class="ss">:format</span><span class="o">=&gt;</span><span class="s2">&quot;partial&quot;</span><span class="p">,</span> <span class="ss">:rel_limit</span><span class="o">=&gt;</span><span class="mi">50</span><span class="p">},</span> <span class="ss">:id</span><span class="o">=&gt;</span><span class="mi">60</span><span class="p">,</span> <span class="ss">:name</span><span class="o">=&gt;</span><span class="s2">&quot;Jon Adams&quot;</span><span class="p">,</span> <span class="ss">:model_name</span><span class="o">=&gt;</span><span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="ss">:description</span><span class="o">=&gt;</span><span class="kp">nil</span><span class="p">,</span> <span class="ss">:created_at</span><span class="o">=&gt;</span><span class="mi">2015</span><span class="o">-</span><span class="mo">02</span><span class="o">-</span><span class="mi">17</span> <span class="mo">04</span><span class="p">:</span><span class="mi">34</span><span class="p">:</span><span class="mi">42</span> <span class="no">UTC</span><span class="p">,</span> <span class="ss">:display_name</span><span class="o">=&gt;</span><span class="s2">&quot;Jon Adams&quot;</span><span class="p">}</span>
+<span class="ss">Total</span><span class="p">:</span> <span class="mi">1</span>
+ <span class="o">=&gt;</span> <span class="c1">#&lt;V-Lucene(model_name:&quot;user&quot;) ~ 4 -&gt; where(name == :b) -&gt; V-Range(-1...100) -&gt; Obj-Map&gt; </span>
+<span class="n">jruby</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">7</span><span class="o">.</span><span class="mi">18</span> <span class="p">:</span><span class="mo">013</span> <span class="o">&gt;</span> <span class="n">xget</span> <span class="s1">&#39;/model/user/filter/name?name=Foo&#39;</span>
+<span class="ss">Total</span><span class="p">:</span> <span class="mi">0</span>
+ <span class="o">=&gt;</span> <span class="c1">#&lt;V-Lucene(model_name:&quot;user&quot;) ~ 4 -&gt; where(name == :b) -&gt; V-Range(-1...100) -&gt; Obj-Map&gt;</span></code></pre></div>
+
+<h3 id="update">Update</h3>
+
+<p>We update model objects using PATCH requests.</p>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">jruby</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">7</span><span class="o">.</span><span class="mi">18</span> <span class="p">:</span><span class="mo">014</span> <span class="o">&gt;</span> <span class="n">xpatch</span> <span class="s1">&#39;/model/user/id/57&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nb">name</span><span class="p">:</span> <span class="s1">&#39;John Doe&#39;</span><span class="p">}</span></code></pre></div>
+
+<h3 id="delete">Delete</h3>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">jruby</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">7</span><span class="o">.</span><span class="mi">18</span> <span class="p">:</span><span class="mo">015</span> <span class="o">&gt;</span> <span class="n">xdelete</span> <span class="s1">&#39;/model/user/id/57&#39;</span></code></pre></div>
 
       </div>
-      
-      
+
+      <footer>
+        
+      </footer>
+
     </article>
 
+
+    
+
+    
+
+
+
+
+
+
+
+
     <footer>
+      <!--
       <span><a href=""></a></span>
       <span><a href="http://xnlogic.com"><i class="fa fa-xnlogic-square"></i></a></span>
       <span>&copy; 2015</span>
+      -->
     </footer>
   </body>
 </html>

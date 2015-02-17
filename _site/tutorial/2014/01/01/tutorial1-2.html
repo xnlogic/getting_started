@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     
-    <meta name="description" content="Accessing the REST API.">
+    <meta name="description" content="Define a simple data model.">
     <title> Your first xnlogic application - part 2 › xnlogic tutorials</title>
     <link rel="canonical" href="/tutorial/2014/01/01/tutorial1-2.html">
     <link href="/main.css" rel="stylesheet" type="text/css">
@@ -18,78 +18,116 @@
   </head>
   <body>
     <header>
-      <h1><a href="/">xnlogic tutorials</a></h1>
+      <a href="/">
+        <img class="center nav-image" src="/assets/logo.png"/>
+        <h1>Tutorials</h1>
+      </a>
+      
+      
+
+      <!--
+      
+      <h1><a href="/"> xnlogic tutorials</a></h1>
+      
+      -->
+      <!--
       <nav>
         <ul>
           <li><a href="/">Home</a></li>
         </ul>
       </nav>
+      -->
     </header>
+
     
     
-    <article>
+
+        <article>
+
       <header>
         <h2><a href="/tutorial/2014/01/01/tutorial1-2.html">Your first xnlogic application - part 2</a></h2>
-        <p><time datetime="2014-01-01T06:59:00-05:00">Jan 1, 2014</time> • tutorial</p>
       </header>
-      <div>
-<p><strong>Basic</strong></p>
 
-<p>Neque porro <em>quisquam</em> est, qui <strong>dolorem</strong> ipsum, quia <strong><em>dolor</em></strong> sit, amet, <a href="http://cjdns.info/">consectetur</a>, adipisci velit.</p>
+      <div>
+<p>Our new application contains only boilerplate code. In order to make it more interesting, we should define a data model. For this tutorial, we will create an over-simplified version of Twitter.</p>
+
+<p><img src="/assets/twitter_like_model.png" alt="Data model" /></p>
 
 <ul>
-  <li>lorem</li>
-  <li>ipsum</li>
+  <li>The only entities/models are <code>User</code>s and <code>Tweet</code>s.</li>
+  <li>The relation between users and tweets is one-to-many. That is, a user can create mutliple tweets, but each tweet is created by exactly one user.</li>
 </ul>
 
-<ol>
-  <li>dolor</li>
-  <li>sit</li>
-</ol>
-
-<table>
-  <thead>
-    <tr>
-      <th>First Header</th>
-      <th>Second Header</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Table Cell</td>
-      <td>Table Cell</td>
-    </tr>
-  </tbody>
-</table>
-
-<p><strong>Blockquote</strong></p>
-
 <blockquote>
-  <p>They who can give up essential liberty to obtain a little temporary safety, deserve neither liberty nor safety.</p>
-
-  <p><em>Benjamin Franklin</em></p>
+  <p><em>Note:</em> All paths below are specified relative to the application root folder.</p>
 </blockquote>
 
-<p><strong>Code</strong></p>
+<h4 id="create-libmyapppartsuserrb">Create <code>lib/my_app/parts/user.rb</code></h4>
 
-<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="k">static</span> <span class="kt">void</span> <span class="nf">asyncEnabled</span><span class="p">(</span><span class="n">Dict</span><span class="o">*</span> <span class="n">args</span><span class="p">,</span> <span class="kt">void</span><span class="o">*</span> <span class="n">vAdmin</span><span class="p">,</span> <span class="n">String</span><span class="o">*</span> <span class="n">txid</span><span class="p">,</span> <span class="k">struct</span> <span class="n">Allocator</span><span class="o">*</span> <span class="n">requestAlloc</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="k">struct</span> <span class="n">Admin</span><span class="o">*</span> <span class="n">admin</span> <span class="o">=</span> <span class="n">Identity_check</span><span class="p">((</span><span class="k">struct</span> <span class="n">Admin</span><span class="o">*</span><span class="p">)</span> <span class="n">vAdmin</span><span class="p">);</span>
-    <span class="kt">int64_t</span> <span class="n">enabled</span> <span class="o">=</span> <span class="n">admin</span><span class="o">-&gt;</span><span class="n">asyncEnabled</span><span class="p">;</span>
-    <span class="n">Dict</span> <span class="n">d</span> <span class="o">=</span> <span class="n">Dict_CONST</span><span class="p">(</span><span class="n">String_CONST</span><span class="p">(</span><span class="s">&quot;asyncEnabled&quot;</span><span class="p">),</span> <span class="n">Int_OBJ</span><span class="p">(</span><span class="n">enabled</span><span class="p">),</span> <span class="nb">NULL</span><span class="p">);</span>
-    <span class="n">Admin_sendMessage</span><span class="p">(</span><span class="o">&amp;</span><span class="n">d</span><span class="p">,</span> <span class="n">txid</span><span class="p">,</span> <span class="n">admin</span><span class="p">);</span>
-<span class="p">}</span></code></pre></div>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">module</span> <span class="nn">MyApp</span>
+  <span class="k">module</span> <span class="nn">User</span>
+    <span class="n">xn_part</span>
 
+    <span class="n">property</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">type</span><span class="p">:</span> <span class="ss">:text</span>
+
+    <span class="n">to_many</span> <span class="ss">:Tweet</span>
+  <span class="k">end</span>
+<span class="k">end</span></code></pre></div>
+
+<h4 id="create-libmyapppartstweetrb">Create <code>lib/my_app/parts/tweet.rb</code></h4>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">module</span> <span class="nn">MyApp</span>
+  <span class="k">module</span> <span class="nn">Tweet</span>
+    <span class="n">xn_part</span>
+
+    <span class="n">property</span> <span class="ss">:content</span><span class="p">,</span> <span class="ss">type</span><span class="p">:</span> <span class="ss">:text</span>
+    <span class="n">property</span> <span class="ss">:time</span><span class="p">,</span> <span class="ss">type</span><span class="p">:</span> <span class="ss">:date</span>
+
+    <span class="n">from_one</span> <span class="ss">:User</span>
+  <span class="k">end</span>
+<span class="k">end</span></code></pre></div>
+
+<h4 id="edit-libmyappmodelsrb">Edit <code>lib/my_app/models.rb</code></h4>
+
+<p>Add the following two entries to the <code>client_models</code> hash:</p>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="ss">user</span><span class="p">:</span> <span class="o">[</span><span class="no">User</span><span class="o">]</span><span class="p">,</span>
+<span class="ss">tweet</span><span class="p">:</span> <span class="o">[</span><span class="no">Tweet</span><span class="o">]</span></code></pre></div>
+
+<blockquote>
+  <p><em>Note:</em> In xnlogic, we define a data model in terms of <a href="https://github.com/xnlogic/xn-gem-template/wiki/Data-Modeling,-Parts-and-Models">models and parts</a>.
+In future tutorials, we will discuss these fundamental concepts in detail. For now, think of a part and model as the same thing - Ruby module that extends a vertex in the graph.</p>
+</blockquote>
 
       </div>
-      
-      
+
+      <footer>
+        
+        <hr />
+        Next tutorial: <a href="/tutorial/2014/01/01/tutorial1-3.html">Your first xnlogic application - part 3</a>
+        
+      </footer>
+
     </article>
 
+
+    
+
+    
+
+
+
+
+
+
+
+
     <footer>
+      <!--
       <span><a href=""></a></span>
       <span><a href="http://xnlogic.com"><i class="fa fa-xnlogic-square"></i></a></span>
       <span>&copy; 2015</span>
+      -->
     </footer>
   </body>
 </html>
