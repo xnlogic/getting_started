@@ -3,10 +3,10 @@
   <channel>
     <title>xnlogic tutorials</title>
     <description>A collection of tutorials for the xnlogic framework.</description>
-    <link></link>
-    <atom:link href="feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Tue, 17 Feb 2015 00:11:39 -0500</pubDate>
-    <lastBuildDate>Tue, 17 Feb 2015 00:11:39 -0500</lastBuildDate>
+    <link>/xnlogic_tutorials</link>
+    <atom:link href="/xnlogic_tutorialsfeed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Tue, 17 Feb 2015 00:30:54 -0500</pubDate>
+    <lastBuildDate>Tue, 17 Feb 2015 00:30:54 -0500</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
     
       <item>
@@ -110,7 +110,7 @@
 </description>
         <pubDate>Wed, 01 Jan 2014 07:03:00 -0500</pubDate>
         <link>/tutorial/2014/01/01/tutorial1-3.html</link>
-        <guid isPermaLink="true">/tutorial/2014/01/01/tutorial1-3.html</guid>
+        <guid isPermaLink="true">/xnlogic_tutorials/tutorial/2014/01/01/tutorial1-3.html</guid>
         
         
         <category>tutorial</category>
@@ -121,7 +121,7 @@
         <title>Your first xnlogic application - part 2</title>
         <description>&lt;p&gt;Our new application contains only boilerplate code. In order to make it more interesting, we should define a data model. For this tutorial, we will create an over-simplified version of Twitter.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/twitter_like_model.png&quot; alt=&quot;Data model&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/xnlogic_tutorials/assets/twitter_like_model.png&quot; alt=&quot;Data model&quot; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;The only entities/models are &lt;code&gt;User&lt;/code&gt;s and &lt;code&gt;Tweet&lt;/code&gt;s.&lt;/li&gt;
@@ -171,7 +171,7 @@ In future tutorials, we will discuss these fundamental concepts in detail. For n
 </description>
         <pubDate>Wed, 01 Jan 2014 07:02:00 -0500</pubDate>
         <link>/tutorial/2014/01/01/tutorial1-2.html</link>
-        <guid isPermaLink="true">/tutorial/2014/01/01/tutorial1-2.html</guid>
+        <guid isPermaLink="true">/xnlogic_tutorials/tutorial/2014/01/01/tutorial1-2.html</guid>
         
         
         <category>tutorial</category>
@@ -182,7 +182,7 @@ In future tutorials, we will discuss these fundamental concepts in detail. For n
         <title>Your first xnlogic application - part 1</title>
         <description>&lt;p&gt;The xnlogic development environment includes a fully configured VM that allows you to get started quickly. &lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/dev_process.png&quot; alt=&quot;The development process&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/xnlogic_tutorials/assets/dev_process.png&quot; alt=&quot;The development process&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;requirements&quot;&gt;Requirements&lt;/h2&gt;
 
@@ -222,7 +222,7 @@ In future tutorials, we will discuss these fundamental concepts in detail. For n
 </description>
         <pubDate>Wed, 01 Jan 2014 07:01:00 -0500</pubDate>
         <link>/tutorial/2014/01/01/tutorial1-1.html</link>
-        <guid isPermaLink="true">/tutorial/2014/01/01/tutorial1-1.html</guid>
+        <guid isPermaLink="true">/xnlogic_tutorials/tutorial/2014/01/01/tutorial1-1.html</guid>
         
         
         <category>tutorial</category>
