@@ -9,13 +9,13 @@ layout: blank
       </header>
 
       <div>
-{{ content }}
+      {{ content }}
       </div>
 
       <footer>
         {% if page.next %}
         <hr />
-        Next tutorial: <a href="{{page.next.url}}">{{page.next.title}}</a>
+        Next tutorial: <a href="{{page.next.url | prepend: site.baseur}}">{{page.next.title}}</a>
         {% endif %}
       </footer>
 
