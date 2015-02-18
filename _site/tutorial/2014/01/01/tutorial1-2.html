@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     
-    <meta name="description" content="Define a simple data model.">
-    <title> Your first xnlogic application - part 2 › xnlogic tutorials</title>
+    <meta name="description" content="A collection of tutorials for the xnlogic framework.">
+    <title> Your first xnlogic application 
+     - Describing our data model 
+    </title>
     <link rel="canonical" href="/xnlogic_tutorials/tutorial/2014/01/01/tutorial1-2.html">
     <link href="/xnlogic_tutorials/main.css" rel="stylesheet" type="text/css">
     <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,200italic,300italic,400italic,600italic,700italic' rel='stylesheet' type='text/css'>
@@ -45,66 +47,38 @@
         <article>
 
       <header>
-        <h2><a href="/xnlogic_tutorials/tutorial/2014/01/01/tutorial1-2.html">Your first xnlogic application - part 2</a></h2>
+        <h5>Your first xnlogic application - Part 2</h5>
+        <hr />
+        <h1>Describing our data model</h1>
+        <hr />
       </header>
 
       <div>
-      <p>Our new application contains only boilerplate code. In order to make it more interesting, we should define a data model. For this tutorial, we will create an over-simplified version of Twitter.</p>
+      <p>At this point, we have a running xnlogic application that contains only boilerplate code. We will gradually turn this application into a simplified version of Twitter.</p>
 
 <p><img src="/xnlogic_tutorials/assets/twitter_like_model.png" alt="Data model" /></p>
 
+<p>Here is a high-level description of our data model:</p>
+
 <ul>
   <li>The only entities/models are <code>User</code>s and <code>Tweet</code>s.</li>
-  <li>The relation between users and tweets is one-to-many. That is, a user can create mutliple tweets, but each tweet is created by exactly one user.</li>
+  <li><code>User</code>s have <code>username</code> and <code>email</code> properties.</li>
+  <li><code>Tweet</code>s have <code>content</code> and <code>created_at</code> properties.</li>
+  <li>A <code>User</code> can create <code>Tweet</code>s.  <br />
+That is, there is a one-to-many relation between a user and their tweets.</li>
+  <li><code>User</code>s can follow one another.  <br />
+That is, there is a many-to-many relation between users (i.e. a user can follow many users, and can be followed by many users).</li>
 </ul>
 
-<blockquote>
-  <p><em>Note:</em> All paths below are specified relative to the application root folder.</p>
-</blockquote>
+<p>In the next few tutorials, we will gradually build our application according to this data model. We will then use the power of the xnlogic framework, to perform interesting queries on our data.</p>
 
-<h4 id="create-libmyapppartsuserrb">Create <code>lib/my_app/parts/user.rb</code></h4>
-
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">module</span> <span class="nn">MyApp</span>
-  <span class="k">module</span> <span class="nn">User</span>
-    <span class="n">xn_part</span>
-
-    <span class="n">property</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">type</span><span class="p">:</span> <span class="ss">:text</span>
-
-    <span class="n">to_many</span> <span class="ss">:Tweet</span>
-  <span class="k">end</span>
-<span class="k">end</span></code></pre></div>
-
-<h4 id="create-libmyapppartstweetrb">Create <code>lib/my_app/parts/tweet.rb</code></h4>
-
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">module</span> <span class="nn">MyApp</span>
-  <span class="k">module</span> <span class="nn">Tweet</span>
-    <span class="n">xn_part</span>
-
-    <span class="n">property</span> <span class="ss">:content</span><span class="p">,</span> <span class="ss">type</span><span class="p">:</span> <span class="ss">:text</span>
-    <span class="n">property</span> <span class="ss">:time</span><span class="p">,</span> <span class="ss">type</span><span class="p">:</span> <span class="ss">:date</span>
-
-    <span class="n">from_one</span> <span class="ss">:User</span>
-  <span class="k">end</span>
-<span class="k">end</span></code></pre></div>
-
-<h4 id="edit-libmyappmodelsrb">Edit <code>lib/my_app/models.rb</code></h4>
-
-<p>Add the following two entries to the <code>client_models</code> hash:</p>
-
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="ss">user</span><span class="p">:</span> <span class="o">[</span><span class="no">User</span><span class="o">]</span><span class="p">,</span>
-<span class="ss">tweet</span><span class="p">:</span> <span class="o">[</span><span class="no">Tweet</span><span class="o">]</span></code></pre></div>
-
-<blockquote>
-  <p><em>Note:</em> In xnlogic, we define a data model in terms of <a href="https://github.com/xnlogic/xn-gem-template/wiki/Data-Modeling,-Parts-and-Models">models and parts</a>.
-In future tutorials, we will discuss these fundamental concepts in detail. For now, think of a part and model as the same thing - Ruby module that extends a vertex in the graph.</p>
-</blockquote>
 
       </div>
 
       <footer>
         
         <hr />
-        Next tutorial: <a href="/xnlogic_tutorials/tutorial/2014/01/01/tutorial1-3.html">Your first xnlogic application - part 3</a>
+        Next: <a href="/xnlogic_tutorials/tutorial/2014/01/01/tutorial1-3.html">CRUD operations</a>
         
       </footer>
 

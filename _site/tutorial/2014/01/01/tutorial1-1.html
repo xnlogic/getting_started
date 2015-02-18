@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     
-    <meta name="description" content="Install the command-line tools, create and launch a new application.">
-    <title> Your first xnlogic application - part 1 › xnlogic tutorials</title>
+    <meta name="description" content="A collection of tutorials for the xnlogic framework.">
+    <title> Your first xnlogic application 
+     - Setting things up 
+    </title>
     <link rel="canonical" href="/xnlogic_tutorials/tutorial/2014/01/01/tutorial1-1.html">
     <link href="/xnlogic_tutorials/main.css" rel="stylesheet" type="text/css">
     <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,200italic,300italic,400italic,600italic,700italic' rel='stylesheet' type='text/css'>
@@ -45,7 +47,10 @@
         <article>
 
       <header>
-        <h2><a href="/xnlogic_tutorials/tutorial/2014/01/01/tutorial1-1.html">Your first xnlogic application - part 1</a></h2>
+        <h5>Your first xnlogic application - Part 1</h5>
+        <hr />
+        <h1>Setting things up</h1>
+        <hr />
       </header>
 
       <div>
@@ -75,7 +80,7 @@
 
 <h2 id="create-an-application">Create An Application</h2>
 
-<p>Let’s create a new application, called <em>my_app</em>, and start a VM for this app.</p>
+<p>Let’s create a new application, called <strong><code>my_app</code></strong>, and start a VM for this app.</p>
 
 <div class="highlight"><pre><code class="language-sh" data-lang="sh">~<span class="nv">$ </span>xnlogic application my_app --key xn_user:xn_password --up</code></pre></div>
 
@@ -87,14 +92,31 @@
   <p>The (optional) <code>--up</code> flag tells xnlogic to start a VM, once the application is created. If you don’t provide the <code>--up</code> option, you can start the VM later, using the <code>xnlogic up</code> command.</p>
 </blockquote>
 
-<p>At this point, your development environment is ready, but your application contains only boilerplate code.</p>
+<h2 id="create-a-database">Create A Database</h2>
+
+<p>Once the VM is up, we can create a database for our application.</p>
+
+<p>Log into the VM.</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">~<span class="nv">$ </span><span class="nb">cd </span>my_app
+~/my_app<span class="nv">$ </span>xnlogic ssh</code></pre></div>
+
+<p>Start the console.</p>
+
+<div class="highlight"><pre><code class="language-sh" data-lang="sh">➜  ~  xn-console</code></pre></div>
+
+<p>And create a database called <strong><code>db01</code></strong>.</p>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">jruby</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">7</span><span class="o">.</span><span class="mi">18</span> <span class="p">:</span><span class="mo">001</span> <span class="o">&gt;</span> <span class="no">PM</span><span class="o">.</span><span class="n">create_client</span><span class="p">(</span><span class="s1">&#39;my_app&#39;</span><span class="p">,</span> <span class="s1">&#39;db01&#39;</span><span class="p">)</span></code></pre></div>
+
+<p>That’s it! our new xnlogic application is ready.</p>
 
       </div>
 
       <footer>
         
         <hr />
-        Next tutorial: <a href="/xnlogic_tutorials/tutorial/2014/01/01/tutorial1-2.html">Your first xnlogic application - part 2</a>
+        Next: <a href="/xnlogic_tutorials/tutorial/2014/01/01/tutorial1-2.html">Describing our data model</a>
         
       </footer>
 
