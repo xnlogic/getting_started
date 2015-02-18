@@ -12,10 +12,10 @@ baseurl: "/xnlogic_tutorials" # comment out if in root directory
 
 style:
     #body: "whitesmoke"
-    padding: 33%
+    padding: 25%
     anchor: "#46f"
     serif-heading: true
-    nav: "#e7e7e7"  # 181818
+    nav: "#e7e7e7"
     #headline: "#a6f"
     description: "white"
     article:

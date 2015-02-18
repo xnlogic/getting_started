@@ -16,9 +16,20 @@ layout: blank
       </div>
 
       <footer>
-        {% if page.next %}
+
         <hr />
-        Next: <a href="{{site.baseurl }}{{page.next.url}}">{{page.next.tutorial_title}}</a>
+
+        {% if page.previous %}
+        <div class="article-nav-item prev-part">
+          <a href="{{site.baseurl }}{{page.previous.url}}">&laquo; {{page.previous.tutorial_title}}</a> 
+        </div>
+        {% endif %}
+
+
+        {% if page.next %}
+        <div class="article-nav-item next-part">
+          <a href="{{site.baseurl }}{{page.next.url}}">{{page.next.tutorial_title}} &raquo;</a> 
+        </div>
         {% endif %}
       </footer>
 

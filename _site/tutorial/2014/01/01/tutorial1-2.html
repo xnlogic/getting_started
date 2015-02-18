@@ -6,8 +6,8 @@
     <meta charset="utf-8">
     
     <meta name="description" content="A collection of tutorials for the xnlogic framework.">
-    <title> Your first xnlogic application 
-     - Describing our data model 
+    <title> Getting started with xnlogic 
+     - Our data model 
     </title>
     <link rel="canonical" href="/xnlogic_tutorials/tutorial/2014/01/01/tutorial1-2.html">
     <link href="/xnlogic_tutorials/main.css" rel="stylesheet" type="text/css">
@@ -47,9 +47,9 @@
         <article>
 
       <header>
-        <h5>Your first xnlogic application - Part 2</h5>
+        <h5>Getting started with xnlogic - Part 2</h5>
         <hr />
-        <h1>Describing our data model</h1>
+        <h1>Our data model</h1>
         <hr />
       </header>
 
@@ -61,24 +61,46 @@
 <p>Here is a high-level description of our data model:</p>
 
 <ul>
-  <li>The only entities/models are <code>User</code>s and <code>Tweet</code>s.</li>
-  <li><code>User</code>s have <code>username</code> and <code>email</code> properties.</li>
-  <li><code>Tweet</code>s have <code>content</code> and <code>created_at</code> properties.</li>
+  <li>The only entities/models are <code>User</code>s and <code>Tweet</code>s.
+    <ul>
+      <li><code>User</code> has two properties, <code>username</code> and <code>email</code>.</li>
+      <li><code>Tweet</code> has one property, <code>text</code>.</li>
+    </ul>
+  </li>
   <li>A <code>User</code> can create <code>Tweet</code>s.  <br />
 That is, there is a one-to-many relation between a user and their tweets.</li>
-  <li><code>User</code>s can follow one another.  <br />
+  <li><code>User</code>s can follow other users.  <br />
 That is, there is a many-to-many relation between users (i.e. a user can follow many users, and can be followed by many users).</li>
 </ul>
 
-<p>In the next few tutorials, we will gradually build our application according to this data model. We will then use the power of the xnlogic framework, to perform interesting queries on our data.</p>
+<h2 id="our-goal">Our Goal</h2>
+
+<p>In the next few tutorials, we will gradually build our application, according to this data model.</p>
+
+<ul>
+  <li>Full featured API server.</li>
+  <li>Backed by a graph database.</li>
+  <li>Use the power of graph databases and the xnlogic framework, to perform interesting queries on our data.</li>
+</ul>
 
 
       </div>
 
       <footer>
-        
+
         <hr />
-        Next: <a href="/xnlogic_tutorials/tutorial/2014/01/01/tutorial1-3.html">CRUD operations</a>
+
+        
+        <div class="article-nav-item prev-part">
+          <a href="/xnlogic_tutorials/tutorial/2014/01/01/tutorial1-1.html">&laquo; Setting up</a> 
+        </div>
+        
+
+
+        
+        <div class="article-nav-item next-part">
+          <a href="/xnlogic_tutorials/tutorial/2014/01/01/tutorial1-3.html">CRUD operations &raquo;</a> 
+        </div>
         
       </footer>
 
