@@ -4,7 +4,7 @@ description: "A collection of tutorials for the xnlogic framework."
 #subheading: "Really cool blog about ... something"
 more: "Go to the tutorial ..."
 #url: "http://niklabs.me"
-baseurl: "/xnlogic_tutorials" # comment out if in root directory
+baseurl: "/getting_started" # comment out if in root directory
 
 #comments:
 #    disqus: "niklasbuschmann"
