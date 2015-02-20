@@ -5,11 +5,13 @@ layout: blank
 {% for page in site.posts reversed %}
   <article>
     <a href="{{ page.url | prepend: site.baseurl }}">
+    	<h3>Part {{ page.tutorial_part}} -  {{ page.tutorial_title }}</h3>
+    <!--
     <header>
       <h3>{{ page.tutorial_name }} - Part {{ page.tutorial_part}}</h3>
       <p>{{ page.tutorial_title }}</p>
-      <!-- {{ site.more }} &raquo; -->
     </header>
+	-->
     </a>
   </article>
 {% endfor %}
