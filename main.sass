@@ -20,31 +20,12 @@ body
     > div
         +contrast($description)
 
+
 {% if site.style.serif-heading %}
-
-body > header h1
-    font-weight: bold
-
 h1, h2, h3, h4, h5, h6 
-    font-family: "Gentium Basic", serif
-    letter-spacing: 2px
-    header &
-        text-transform: uppercase
-
+    letter-spacing: 1px
 {% endif %}
 
-{% if site.style.headline %}
-
-#body > div:first-of-type
-#    +contrast($headline)
-#    h1
-#        padding-top: 1em
-#        padding-bottom: 1em
-
-#nav ul
-#    margin: 0
-
-{% endif %}
 
 article:nth-of-type(even)
     +article_background($even, $anchor)
