@@ -21,21 +21,17 @@ body
         +contrast($description)
 
 
-{% if site.style.serif-heading %}
-h1, h2, h3, h4, h5, h6 
-    letter-spacing: 1px
-{% endif %}
 
-
-article:nth-of-type(even)
+.sidebar-item:nth-of-type(even)
     +article_background($even, $anchor)
-    h1, h2, h3
+    .current-page-marker
         text-shadow: 1px 1px #303030
 
-article:nth-of-type(odd)
+.sidebar-item:nth-of-type(odd)
     +article_background($odd, $anchor)
-    h1, h2, h3
+    .current-page-marker
         text-shadow: 1px 1px #9f9f9f
+
 
 @import vendor
 

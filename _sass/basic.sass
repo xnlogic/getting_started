@@ -4,6 +4,7 @@
     font-weight: 200
     src: url('assets/century_gothic.TTF'), url('assets/century_gothic.eot')
 
+
 body
     font-family: 'Century Gothic'
     font-size: 1.4em
@@ -17,10 +18,10 @@ h1, h2, h3, h4, h5, h6
     a
         font-size: 1.2em
 
-h1, h2, h3
-    margin-top: 2em
-    margin-bottom: 0.5em
-    text-shadow: 1px 1px #9f9f9f
+
+.container-fluid
+    padding-top: 0
+
 
 a
     color: inherit
@@ -31,81 +32,110 @@ a
     &#selected
         color: #46e
 
-iframe, img, embed, object, video
-    max-width: 100%
-    border-radius: 2px
 
 
 table
     border-collapse: collapse
     width: 100%
     th, td
-        padding: .5em 1em
+        padding: .25em 0.25em
         border: 1px solid
 
-pre
-    overflow: auto
-    padding: 1em
-    font-size: .8em
-    code
-        font-size: 1em
 
-code
-    font-size: .8em
+pre
+    padding: 1em
+    font-size: 0.8em
+    background: #333
+    color: #ffffff
+    overflow-x: auto
+    margin-top: 2em
+    margin-bottom: 2em
+
+pre 
+    code
+        overflow-wrap: normal
+        white-space: pre
+
 
 blockquote
     border-left: 5px solid #46e
     margin: 0
     padding-left: 1.5em
 
-article
-    border-top: 1px solid
-    overflow-x: auto
-    header
-        text-align: center
-    header h1
-        margin-top: 1em
-        margin-bottom: 1em
-    header h5
-        margin-top: 1em
-        margin-bottom: 1em
-    > div
-        margin-top: 2em
-        margin-bottom: 2em
+
+
+
+#left-panel
+    float: left
+    display : block
+    width : 20%
+
+
+
+#content-panel
+    border-left: 1px solid #9f9f9f
+    font-size: 1.2em
+
     img
         display: block
         margin: 2em auto 2em auto
-    footer a
-        border: 1px solid
-        border-radius: 3px
-        padding: .3em .6em
-        transition: background-color .2s ease-out
-    footer hr
-        margin: 2em 0 1em 0
+        max-width: 95%
+
+    h1
+        margin-top: 0.1em
+        margin-bottom: 1.4em
+        font-size: 2.5em
+
+    h2, h3, h4
+        margin-top: 2em
+        margin-bottom: 1em
+
+
+.header
+    background: #e7e7e7
+    border-bottom: 1px solid #9f9f9f
+    margin-bottom: 1em
+    margin-top: 0
         
+.homepage-text
+    a
+        color: #2a51ff
+        text-decoration: underline
 
 
-body > header h1
-    margin-top: .25em
-    margin-bottom: .5em
+.content-footer
+    border-top: 1px solid #9f9f9f
+    margin-top: 1em
+    
+    .page-link
+        border: 1px solid #303030
+        color: #2a51ff
+        padding: .5em
+        transition: background-color .2s ease-out
+        max-width: 40%
+        margin-top: 1em
+        margin-bottom: 1em
 
-body > footer
-    display: flex
-    justify-content: space-between
+    .page-link:hover
+        background: #303030
+        color: #ffffff
 
-.center
-    display: block
-    margin-left: auto
-    margin-right: auto
+    a:hover
+        color: #ffffff
 
-.nav-image
-    max-width: 7em
-    margin-top: 0.5em
-    margin-right: 0.5em
-    float: left
 
-.article-nav-item 
-    max-width: 40%
+
+.sidebar-img
+    margin-top: 0
+    margin: 0.5em
+    max-height: 6em
+
+.sidebar-item
+    padding: 0.5em
+
+    .current-page-marker
+        margin-right: 1em
+
 
 .prev-part
     float: left

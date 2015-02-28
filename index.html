@@ -1,17 +1,23 @@
 ---
-layout: blank
+tutorial_title: "Getting started with xnlogic"
 ---
 
-{% for page in site.posts reversed %}
-  <article>
-    <a href="{{ page.url | prepend: site.baseurl }}">
-    	<h3>Part {{ page.tutorial_part}} -  {{ page.tutorial_title }}</h3>
-    <!--
-    <header>
-      <h3>{{ page.tutorial_name }} - Part {{ page.tutorial_part}}</h3>
-      <p>{{ page.tutorial_title }}</p>
-    </header>
-	-->
-    </a>
-  </article>
-{% endfor %}
+<div class="homepage-text">
+
+    <p>
+    The <a href="http://xnlogic.com">xnlogic</a> framework allows you to quickly build 
+    enterprise web applications that leverage the power of graph databases.
+    </p>
+
+
+    <img src="assets/homepage_animation.gif"/>
+
+    <p>
+    This tutorial will guide you through some of the main features of the framework.
+    </p>
+
+    <p>
+    <a href="{{ site.posts[8].url | prepend: site.baseurl }}">Let's get started</a> ...
+    </p>
+
+</div>
