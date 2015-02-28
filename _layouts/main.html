@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="{{ site.encoding }}">
+    
+    <title>
+    xnlogic {% if page.tutorial_title %} - {{ page.tutorial_title }} {% endif %}
+    </title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+    <link href="{{ "/main.css" | prepend: site.baseurl }}" rel="stylesheet" type="text/css">
+    <link rel="alternate" type="application/rss+xml" title="{{ site.title }} &raquo; Feed" href="{{ "/feed.xml" | prepend: site.baseurl }}">
+
+  </head>
+  <body>
+
+    <div class="container-fluid">
+
+    <div class="row header">
+      <div id="sidebar" class="col-md-2">
+      <a href="{{ site.baseurl }}/">
+        <img class="sidebar-img" src="{{ site.baseurl }}/assets/logo.png"/>
+      </a>
+      </div>
+    </div>
+
+    <div class="row">
+
+        <div id="sidebar" class="col-md-2 hidden-xs hidden-sm">
+
+          {% assign i = 1 %}
+          {% for p in site.posts reversed %}
+            <div class="sidebar-item">
+
+              {% if page.url != p.url %}
+                <a href="{{ p.url | prepend: site.baseurl }}">
+                  {{ i }}. {{ p.tutorial_title }}
+                </a>
+              {% else %}
+                  {{ i }}. {{ p.tutorial_title }}
+                  <span class="pull-right current-page-marker">&raquo; </span>
+              {% endif %}
+
+              {% capture i %}{{ i | plus: 1 }}{% endcapture %}
+              </a>
+            </div>
+          {% endfor %}
+
+        </div>
+
+
+        <div id="content-panel" class="col-md-9">
+
+          <h1>{{ page.tutorial_title }}</h1>
+
+          {{ content }}
+
+          <div class="content-footer">
+
+            {% if page.previous %}
+            <div class="page-link prev-part">
+              <a href="{{site.baseurl }}{{page.previous.url}}">&laquo; {{page.previous.tutorial_title}}</a> 
+            </div>
+            {% endif %}
+
+
+            {% if page.next %}
+            <div class="page-link next-part">
+              <a href="{{site.baseurl }}{{page.next.url}}">{{page.next.tutorial_title}} &raquo;</a> 
+            </div>
+            {% endif %}
+
+          </div>
+
+        </div>        
+            
+    </div>
+    </div>
+
+
+  </body>
+</html>

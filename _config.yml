@@ -1,9 +1,7 @@
 title: "xnlogic tutorials"
-#author: "Blog Author"
 description: "A collection of tutorials for the xnlogic framework."
-#subheading: "Really cool blog about ... something"
 more: "Go to the tutorial ..."
-baseurl: "/getting_started" # comment out if in root directory
+baseurl: "/getting_started"
 
 style:
     #body: "whitesmoke"
@@ -14,12 +12,12 @@ style:
     #headline: "#a6f"
     description: "white"
     article:
-        odd: "#ffffff"
-        even: "#222222"
+        odd:  "#222222"
+        even: "#ffffff"
 
 links:
   - github: "https://github.com/xnlogic/xnlogic"
   - xnlogic: "http://xnlogic.com"
 
 excerpt_separator: "\n\n\n"
-defaults: [{scope: {path: ""}, values: {layout: "default"}}, {scope: {path: "", type: "posts"}, values: {comments: true}}]
+defaults: [{scope: {path: ""}, values: {layout: "main"}}, {scope: {path: "", type: "posts"}, values: {comments: true}}]
