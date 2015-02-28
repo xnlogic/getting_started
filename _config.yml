@@ -9,7 +9,7 @@ style:
     #body: "whitesmoke"
     padding: 25%
     anchor: "#46f"
-    serif-heading: true
+    serif-heading: false
     nav: "#e7e7e7"
     #headline: "#a6f"
     description: "white"
