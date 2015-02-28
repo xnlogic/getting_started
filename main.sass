@@ -29,9 +29,13 @@ h1, h2, h3, h4, h5, h6
 
 article:nth-of-type(even)
     +article_background($even, $anchor)
+    h1, h2, h3
+        text-shadow: 1px 1px #303030
 
 article:nth-of-type(odd)
     +article_background($odd, $anchor)
+    h1, h2, h3
+        text-shadow: 1px 1px #9f9f9f
 
 @import vendor
 

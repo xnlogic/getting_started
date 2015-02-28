@@ -1,16 +1,26 @@
-body
-    font-family: "Heiti TC"
+@font-face
+    font-family: 'Century Gothic'
+    font-style: normal
     font-weight: 200
+    src: url('assets/century_gothic.TTF'), url('assets/century_gothic.eot')
+
+body
+    font-family: 'Century Gothic'
     font-size: 1.4em
     font-size: calc(.6vw + .8em)
     line-height: 1.6
     margin: 0
 
 h1, h2, h3, h4, h5, h6
-    font-weight: 300
+    font-weight: 200
     line-height: 1em
     a
         font-size: 1.2em
+
+h1, h2, h3
+    margin-top: 2em
+    margin-bottom: 0.5em
+    text-shadow: 1px 1px #9f9f9f
 
 a
     color: inherit
